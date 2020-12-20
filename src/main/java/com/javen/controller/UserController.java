@@ -42,7 +42,7 @@ public class UserController {
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     public R update(@RequestBody User user)
     {
-
+        String newpassword=user.getPassword();
 
 
         return R.ok("修改成功");
