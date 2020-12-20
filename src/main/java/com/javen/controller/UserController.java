@@ -4,6 +4,7 @@ package com.javen.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.javen.model.User;
 import com.javen.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
@@ -32,10 +33,9 @@ public class UserController {
         if(userService.getOne(new QueryWrapper<User>().eq("phone",phone))!=null) {
             return new R().error("该手机号已经注册");
         }
-        String password = user.getPassword();
-        user.setPhone(phone);
-        user.setPassword(password);
-        user.setName(name);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encode);
         userService.save(user);
         return new R().ok("注册成功");
     }
@@ -58,7 +58,8 @@ public class UserController {
         {
             return new R().error("无此用户");
         }
-        else if(byId.getPassword().equals(pwd))
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(encoder.matches(pwd,byId.getPassword()))
         {
             return new R().ok("登陆成功").put("user",byId);
         }
