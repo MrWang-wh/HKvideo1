@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @since 2020-12-18
  */
 @Controller
-@RequestMapping("/javen/collection")
 public class CollectionController {
     @RequestMapping(value="/user",method = RequestMethod.GET)
     public String hello(@RequestParam("from") String from) {
