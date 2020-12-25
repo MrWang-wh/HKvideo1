@@ -16,5 +16,7 @@
     <sql id="Base_Column_List">
         user_id, name, password, identity, phone, level
     </sql>
-
+    <update id="changepassword">
+        update user set password=#{password} where phone=#{phone}
+    </update>
 </mapper>

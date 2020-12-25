@@ -3,6 +3,8 @@ package com.javen.mapping;
 import com.javen.model.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -14,5 +16,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-
+    //@Update("update user set password=#{s} where phone=#{phone}")
+    void changepassword(@Param("phone") int phone,@Param("password") String password);
 }

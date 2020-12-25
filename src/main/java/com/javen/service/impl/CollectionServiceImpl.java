@@ -1,6 +1,5 @@
 package com.javen.service.impl;
 
-import com.javen.dao.CollectionDao;
 import com.javen.model.Collection;
 import com.javen.mapping.CollectionMapper;
 import com.javen.service.CollectionService;

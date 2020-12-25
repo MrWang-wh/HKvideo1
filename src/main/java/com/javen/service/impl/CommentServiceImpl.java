@@ -1,6 +1,5 @@
 package com.javen.service.impl;
 
-import com.javen.dao.CommentDao;
 import com.javen.model.Comment;
 import com.javen.mapping.CommentMapper;
 import com.javen.service.CommentService;

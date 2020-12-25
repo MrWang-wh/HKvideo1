@@ -13,11 +13,14 @@
         <result column="star" property="star" />
         <result column="type" property="type" />
         <result column="status" property="status" />
+        <result column="name" property="name" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        video_id, user_id, face_url, description, upload_time, url, star, type, status
+        video_id, user_id, face_url, description, upload_time, url, star, type, status,name
     </sql>
-
+    <update id="givestar">
+        update video set star=star+1 where video_id=#{videoId}
+    </update>
 </mapper>

@@ -2,6 +2,7 @@ package com.javen.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.javen.mapping.UserMapper;
 import com.javen.model.User;
 import com.javen.service.UserService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,7 +24,9 @@ import javax.annotation.Resource;
 @Controller
 public class UserController {
     @Resource
-    UserService userService;
+    private UserService userService;
+    @Resource
+    private UserMapper userMapper;
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
     public R register(@RequestBody User user)
@@ -40,12 +43,22 @@ public class UserController {
         return new R().ok("注册成功");
     }
     @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public R update(@RequestBody User user)
+    @ResponseBody
+    public R update(@RequestParam("phone") int phone,@RequestParam("newpassword") String newpassword,@RequestParam("oldpassword") String oldpassword)
     {
-        String newpassword=user.getPassword();
-
-
-        return R.ok("修改成功");
+        User user=userService.getOne(new QueryWrapper<User>().eq("phone",phone));
+        if(user == null){
+            return R.error("修改密码失败");
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(encoder.matches(oldpassword,user.getPassword()))
+        {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encode = passwordEncoder.encode(newpassword);
+            userMapper.changepassword(phone,encode);
+            return new R().ok("密码修改成功");
+        }
+        else return R.error(401,"原密码错误");
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)

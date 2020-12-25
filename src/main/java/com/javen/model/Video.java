@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author Wanghan
@@ -43,7 +43,7 @@ public class Video extends Model<Video> {
     private String type;
 
     private Integer status;
-
+    private  String name;
 
     public Integer getVideoId() {
         return videoId;

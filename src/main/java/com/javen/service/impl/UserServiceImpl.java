@@ -1,6 +1,5 @@
 package com.javen.service.impl;
 
-import com.javen.dao.UserDao;
 import com.javen.model.User;
 import com.javen.mapping.UserMapper;
 import com.javen.service.UserService;

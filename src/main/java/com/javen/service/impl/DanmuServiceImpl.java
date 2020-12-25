@@ -1,6 +1,5 @@
 package com.javen.service.impl;
 
-import com.javen.dao.DanmuDao;
 import com.javen.model.Danmu;
 import com.javen.mapping.DanmuMapper;
 import com.javen.service.DanmuService;
@@ -17,9 +16,8 @@ import org.springframework.stereotype.Service;
  */
 @Service("danmuService")
 public class DanmuServiceImpl extends ServiceImpl<DanmuMapper, Danmu> implements DanmuService {
-
-    @Override
-    public boolean save(Danmu entity) {
+    //@Override
+    /*public boolean save(Danmu entity) {
         return false;
-    }
+    }*/
 }

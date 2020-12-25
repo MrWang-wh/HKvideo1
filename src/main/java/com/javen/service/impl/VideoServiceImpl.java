@@ -1,6 +1,5 @@
 package com.javen.service.impl;
 
-import com.javen.dao.VideoDao;
 import com.javen.model.Video;
 import com.javen.mapping.VideoMapper;
 import com.javen.service.VideoService;
